@@ -1,5 +1,6 @@
 FROM ubuntu:21.04
 
+LABEL version="0.1.0"
 LABEL maintainer="stefan_voelker@hotmail.com"
 
 ENV NAME=roesti

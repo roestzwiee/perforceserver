@@ -1,9 +1,20 @@
-# Perforce Server
+# Perforce Helix Core Server
 
-Minimalistic setup for a Perforce Server running under Ubuntu. 
+Minimalistic setup for Perforce Helix Core Server running under Ubuntu. 
 
 To start it simply type: 
+ 
+ ```
+ docker run -d --name=PerforceServer roestzwiee/perforceserver -e  P4PASSWD="changeme123"
+ ```
 
-docker run --name=PerforceServer roestzwiee/perforceserver
+ Container can be stopped and restarted without any effect. 
 
-When use make sure you meet the licence requirements. 
+ ```
+P4ROOT="/opt/perforce/servers/master"
+P4PORT=1666
+P4USER="admin"
+P4PASSWD="changeme123"
+ ```
+
+When use make sure you meet the perforce licence requirements. 

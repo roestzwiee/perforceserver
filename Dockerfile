@@ -3,11 +3,13 @@ FROM ubuntu:21.04
 LABEL version="0.1.0"
 LABEL maintainer="stefan_voelker@hotmail.com"
 
-ENV NAME=roesti
 ENV P4ROOT="/opt/perforce/servers/master"
 ENV P4PORT=1666
 ENV P4USER="admin"
 ENV P4PASSWD="changeme123"
+
+#maybe move startup.sh to P4ROOT
+ADD "startup.sh" "${P4ROOT}/startup.sh"
 
 RUN  apt-get update \
     && apt-get upgrade -y --no-install-recommends --no-install-suggests \
@@ -16,8 +18,9 @@ RUN  apt-get update \
     && wget -qO - https://package.perforce.com/perforce.pubkey | apt-key add - \
     && echo "deb http://package.perforce.com/apt/ubuntu focal release" > /etc/apt/sources.list.d/perforce.list \
     && apt-get update \
-    && apt-get install helix-p4d -y --no-install-recommends --no-install-suggests 
+    && apt-get install helix-p4d -y --no-install-recommends --no-install-suggests  \
+    && chmod 755 "${P4ROOT}/startup.sh"
 
-CMD ["/bin/bash", "-c", "/opt/perforce/sbin/configure-helix-p4d.sh perforce -n -p ${P4PORT} -r ${P4ROOT} -u ${P4USER}  -P ${P4PASSWD}  --unicode && tail -f /dev/null"]
+CMD ["/bin/bash", "-c", "${P4ROOT}/startup.sh && tail -f /dev/null"]
 
 EXPOSE 1666

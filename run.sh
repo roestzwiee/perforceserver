@@ -6,5 +6,6 @@ if [ ! -e $INIT_DONE ]; then
     echo "Container starts for the first time, initializing..."
     /opt/perforce/sbin/configure-helix-p4d.sh perforce -n -p ${P4PORT} -r ${P4ROOT} -u ${P4USER}  -P ${P4PASSWD}  --unicode
 else
+    p4dctl start -t p4d perforce
     echo "Container started."
 fi

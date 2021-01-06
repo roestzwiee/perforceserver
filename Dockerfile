@@ -8,8 +8,7 @@ ENV P4PORT=1666
 ENV P4USER="admin"
 ENV P4PASSWD="changeme123"
 
-#maybe move startup.sh to P4ROOT
-ADD "startup.sh" "${P4ROOT}/startup.sh"
+ADD "run.sh" "${P4ROOT}/run.sh"
 
 RUN  apt-get update \
     && apt-get upgrade -y --no-install-recommends --no-install-suggests \
@@ -19,8 +18,8 @@ RUN  apt-get update \
     && echo "deb http://package.perforce.com/apt/ubuntu focal release" > /etc/apt/sources.list.d/perforce.list \
     && apt-get update \
     && apt-get install helix-p4d -y --no-install-recommends --no-install-suggests  \
-    && chmod 755 "${P4ROOT}/startup.sh"
+    && chmod 755 "${P4ROOT}/run.sh"
 
-CMD ["/bin/bash", "-c", "${P4ROOT}/startup.sh && tail -f /dev/null"]
+CMD ["/bin/bash", "-c", "${P4ROOT}/run.sh && tail -f /dev/null"]
 
 EXPOSE 1666

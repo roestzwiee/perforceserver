@@ -1,3 +1,5 @@
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/roestzwiee/perforceserver)](https://hub.docker.com/r/roestzwiee/perforceserver/)
+
 # Perforce Helix Core Server
 
 Minimalistic setup for Perforce Helix Core Server running under Ubuntu. 
